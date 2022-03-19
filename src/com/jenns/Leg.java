@@ -16,11 +16,8 @@ public class Leg {
         multiplikator_out = pMultiplikatorOut;
         debug = pDebug;
 
-
-        int aktuelle_punkte = punkte_initial;
-
         if (debug) {
-            System.out.println("Punkte Initial: " + aktuelle_punkte);
+            System.out.println("Punkte Initial: " + pPunkteInitial);
 
             switch (multiplikator_out) {
                 case 2:
@@ -34,7 +31,14 @@ public class Leg {
             }
         }
 
+        int aktuelle_punkte = punkte_initial;
+
+        StringBuilder output = new StringBuilder();
+
         while (aktuelle_punkte != 0) {
+            output = new StringBuilder();
+            aktuelle_punkte = punkte_initial;
+            zug_liste = new ArrayList<>();
             int b = 0;
             while (aktuelle_punkte != 0 && b < 30) {
                 b++;
@@ -79,13 +83,15 @@ public class Leg {
                     String str_aktuelle_punkte = Integer.toString(aktuelle_punkte);
 
                     String output_string = String.format("%1$-19s" + "Summe:" + "%2$4s" + "%3$14s" + "Punkte:" + "%4$4s", str_zug, str_summme, str_uberworfen, str_aktuelle_punkte);
-                    System.out.println(output_string);
+                    output.append(output_string).append("\n");
                 }
 
             }
+
         }
 
         if (debug) {
+            System.out.print(output);
             System.out.println(zug_liste);
         }
     }

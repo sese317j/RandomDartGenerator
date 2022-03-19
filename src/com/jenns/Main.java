@@ -6,22 +6,25 @@ public class Main {
     public static void main(String[] args) {
 
         final int punkte_initial = 501;
-        final int multiplikator_out = 2;
+        final int multiplikator_out = 3;
         final boolean debug = true;
         List<List<Wurf>> leg = new ArrayList<>();
 
         int aktuelle_punkte = punkte_initial;
-        System.out.println("Punkte Initial: "  + aktuelle_punkte);
 
-        switch (multiplikator_out){
-            case 2:
-                System.out.println("Double Out");
-                break;
-            case 3:
-                System.out.println("Tripple Out");
-                break;
-            default:
-                break;
+        if(debug) {
+            System.out.println("Punkte Initial: " + aktuelle_punkte);
+
+            switch (multiplikator_out) {
+                case 2:
+                    System.out.println("Double Out");
+                    break;
+                case 3:
+                    System.out.println("Tripple Out");
+                    break;
+                default:
+                    break;
+            }
         }
 
         while (aktuelle_punkte != 0) {
@@ -41,16 +44,17 @@ public class Main {
                     if (aktuelle_punkte - punkte_zug == 0 && temp_wurf.getMultiplikator() == multiplikator_out) {
                         aktuelle_punkte = 0;            //Punkte auf 0, Spiel zu ende
                         break;                          //verlasse aktuellen Zug
-                    } else if (aktuelle_punkte - punkte_zug < 0) {        //Falls Überworfen
+                    } else if (aktuelle_punkte - punkte_zug < 0 || aktuelle_punkte - punkte_zug < multiplikator_out) {        //Falls Überworfen
                         uberworfen = true;
                         break;                                        //Verlasse aktuellen Zug aber zieh nicht Punkte ab
                     }
 
                 }
 
-                if (aktuelle_punkte - punkte_zug > 0) {
+                if (aktuelle_punkte - punkte_zug > 0 && !uberworfen) {
                     aktuelle_punkte -= punkte_zug;
                 }
+
                 leg.add(zug);           // der Gesamte zug wird dem Leg hinzugefügt
 
                 if (debug) {

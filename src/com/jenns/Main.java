@@ -66,6 +66,15 @@ public class Main {
             set_nummer++;
         }
 
+        wurf_output.setLength(wurf_output.length() - 2);
+        zug_output.setLength(zug_output.length() - 2);
+        leg_output.setLength(leg_output.length() - 2);
+        set_output.setLength(set_output.length() - 2);
+
+        wurf_output.append(";\n");
+        zug_output.append(";\n");
+        leg_output.append(";\n");
+        set_output.append(";\n");
 
 
         writeStringToFile("wurfe.txt",wurf_output.toString());

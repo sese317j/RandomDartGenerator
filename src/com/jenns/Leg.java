@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Leg {
 
-    private List<Zug> zug_liste;
-    private int id;
-    private int[] SpielerIDs;
-    private int punkte_initial;
-    private int multiplikator_out;
-    private boolean debug;
+    private final List<Zug> zug_liste;
+    private final int id;
+    private final int[] SpielerIDs;
+    private final int punkte_initial;
+    private final int multiplikator_out;
+    private final boolean debug;
 
     public Leg(boolean pDebug , int pMultiplikatorOut, int pPunkteInitial, int pId, int[] pSpielerIDs) {
 
@@ -25,11 +25,11 @@ public class Leg {
             System.out.println("Punkte Initial: " + pPunkteInitial);
 
             switch (multiplikator_out) {
+                case 1:
+                    System.out.println("Straight Out");
+                    break;
                 case 2:
                     System.out.println("Double Out");
-                    break;
-                case 3:
-                    System.out.println("Tripple Out");
                     break;
                 default:
                     break;
@@ -66,9 +66,18 @@ public class Leg {
                         punkte_zug += temp_wurf.getPunkte();    // Punkte für den aktuellen Zug berechnen
 
                         // Falls Punkte 0 und letzter wurf passt zu multiplikator
-                        if (aktuelle_punkte - punkte_zug == 0 && temp_wurf.getMultiplikator() == multiplikator_out) {
-                            aktuelle_punkte = 0;            //Punkte auf 0, Spiel zu ende
-                            break;                          //verlasse aktuellen Zug
+                        if (aktuelle_punkte - punkte_zug == 0) {
+                            if(multiplikator_out == 1){
+                                aktuelle_punkte = 0;            //Punkte auf 0, Spiel zu ende
+                                break;                          //verlasse aktuellen Zug
+                            }
+                            else{
+                                if(temp_wurf.getMultiplikator() == multiplikator_out){
+                                    aktuelle_punkte = 0;            //Punkte auf 0, Spiel zu ende
+                                    break;                          //verlasse aktuellen Zug
+                                }
+                            }
+
                         } else if (aktuelle_punkte - punkte_zug < 0 || aktuelle_punkte - punkte_zug < multiplikator_out) {        //Falls Überworfen
                             uberworfen = true;
                             break;                                        //Verlasse aktuellen Zug aber zieh nicht Punkte ab
@@ -115,6 +124,10 @@ public class Leg {
 
     public Leg(int pId){
         this(false,2,501, pId, new int[]{1});
+    }
+
+    public int getId() {
+        return id;
     }
 
     public List<Zug> getZug_liste (){

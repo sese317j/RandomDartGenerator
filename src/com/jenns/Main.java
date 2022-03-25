@@ -14,16 +14,23 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println(PathToDir);
-        final int punkte_initial = 501;
-        final int multiplikator_out = 2;
+        final int punkte_initial = 301;
+        final int multiplikator_out = 1;
         final boolean debug = true;
-        final int[] spieler_ids = new int[]{1,2,3};
-        final int anzahl_sets = 2;
-        final int anzahl_legs = 3;
+        final int[] spieler_ids = new int[]{1,2};
+        final int anzahl_sets = 1;
+        final int anzahl_legs = 5;
+        final String spiel_string = "1";
+
+        final int wurf_offset = 0;
+        final int zug_offset = 0;
+        final int leg_offset = 0;
+        final int set_offset = 0;
+
 
         List<List<Leg>> all_sets = new ArrayList<>();
 
-        int legID = 1;
+        int legID = leg_offset + 1;
         for(int i = 0; i < anzahl_sets; i++){
             List<Leg> legList = new ArrayList<>();
             for(int j = 0; j < anzahl_legs; j++){
@@ -39,10 +46,10 @@ public class Main {
         StringBuilder zug_output = new StringBuilder("INSERT INTO Zug (id,LegId,SpielerId,SummePunkte) VALUES\n");
         StringBuilder wurf_output = new StringBuilder("INSERT INTO Wurf (id,ZugId,Zahl,Feldart) VALUES\n");
 
-        int set_nummer = 1;
-        int leg_nummer = 1;
-        int zug_nummer = 1;
-        int wurf_nummer = 1;
+        int set_nummer = set_offset + 1;
+        int leg_nummer = leg_offset + 1;
+        int zug_nummer = zug_offset + 1;
+        int wurf_nummer = wurf_offset + 1;
 
         for(List<Leg> set : all_sets){
             //FÜr jedes set
@@ -64,7 +71,7 @@ public class Main {
                 leg_output.append("('" + leg_nummer + "', '" + set_nummer + "')," + "\n");
                 leg_nummer++;
             }
-            set_output.append("('" + set_nummer + "', '" + "Spiel Nr 1" + "')," + "\n");
+            set_output.append("('" + set_nummer + "', '" + spiel_string + "')," + "\n");
             set_nummer++;
         }
 

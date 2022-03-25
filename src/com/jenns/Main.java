@@ -13,11 +13,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         System.out.println(PathToDir);
         final int punkte_initial = 501;
         final int multiplikator_out = 2;
-        final boolean debug = false;
+        final boolean debug = true;
+        final int anzahl_player = 1;
         final int anzahl_sets = 2;
         final int anzahl_legs = 3;
 
@@ -32,10 +32,10 @@ public class Main {
             all_sets.add(legList);
         }
 
-        StringBuilder set_output = new StringBuilder();
-        StringBuilder leg_output = new StringBuilder();
-        StringBuilder zug_output = new StringBuilder();
-        StringBuilder wurf_output = new StringBuilder();
+        StringBuilder set_output = new StringBuilder("INSERT INTO Satz (id,SpielId) VALUES\n");
+        StringBuilder leg_output = new StringBuilder("INSERT INTO Leg (id,SatzId) VALUES\n");
+        StringBuilder zug_output = new StringBuilder("INSERT INTO Zug (id,LegId,SpielerId,SummePunkte) VALUES\n");
+        StringBuilder wurf_output = new StringBuilder("INSERT INTO Wurf (id,ZugId,Zahl,Feldart) VALUES\n");
 
         int set_nummer = 1;
         int leg_nummer = 1;
@@ -53,7 +53,7 @@ public class Main {
 
                     for(Wurf wurf : zug){
                         // Für jeden Wurf
-                        wurf_output.append("('" + wurf_nummer + "', '" + zug_nummer +"', '" + wurf + "')," + "\n");
+                        wurf_output.append("('" + wurf_nummer + "', '" + zug_nummer +"', '" + wurf.getWurf() +"', '" + wurf.getMultiplikator() + "')," + "\n");
                         wurf_nummer++;
                     }
                     zug_output.append("('" + zug_nummer + "', '" + leg_nummer + "')," + "\n");

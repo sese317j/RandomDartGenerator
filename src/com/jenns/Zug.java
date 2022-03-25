@@ -8,7 +8,7 @@ public class Zug {
     private int legID;
     private List<Wurf> wurf_liste;
 
-    private Zug (int pSpielerID,int pLegID ){
+    public Zug (int pSpielerID,int pLegID ){
         wurf_liste = new ArrayList<>();
         spielerID = pSpielerID;
         legID = pLegID;

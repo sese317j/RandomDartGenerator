@@ -17,17 +17,19 @@ public class Main {
         final int punkte_initial = 501;
         final int multiplikator_out = 2;
         final boolean debug = true;
-        final int anzahl_player = 1;
+        final int[] spieler_ids = new int[]{1,2,3};
         final int anzahl_sets = 2;
         final int anzahl_legs = 3;
 
         List<List<Leg>> all_sets = new ArrayList<>();
 
+        int legID = 1;
         for(int i = 0; i < anzahl_sets; i++){
             List<Leg> legList = new ArrayList<>();
             for(int j = 0; j < anzahl_legs; j++){
-                Leg einLeg = new Leg( debug, multiplikator_out, punkte_initial);
+                Leg einLeg = new Leg( debug, multiplikator_out, punkte_initial, legID, spieler_ids);
                 legList.add(einLeg);
+                legID++;
             }
             all_sets.add(legList);
         }
@@ -48,15 +50,15 @@ public class Main {
             for(Leg leg : set){
                 // Für jedes Leg
 
-                for(List<Wurf> zug : leg.getZug_liste()){
+                for(Zug zug : leg.getZug_liste()){
                     // Für jeden Zug
 
-                    for(Wurf wurf : zug){
+                    for(Wurf wurf : zug.getWurf_liste()){
                         // Für jeden Wurf
                         wurf_output.append("('" + wurf_nummer + "', '" + zug_nummer +"', '" + wurf.getWurf() +"', '" + wurf.getMultiplikator() + "')," + "\n");
                         wurf_nummer++;
                     }
-                    zug_output.append("('" + zug_nummer + "', '" + leg_nummer + "')," + "\n");
+                    zug_output.append("('" + zug_nummer + "', '" + zug.getLegID() + "', '" + zug.getSpielerID() +"', '" + zug.get_summe_punkte() +"')," + "\n");
                     zug_nummer++;
                 }
                 leg_output.append("('" + leg_nummer + "', '" + set_nummer + "')," + "\n");

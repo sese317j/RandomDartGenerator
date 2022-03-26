@@ -27,12 +27,12 @@ public class Main {
 
 
         final int punkte_initial = 501;
-        final int multiplikator_out = 3;
+        final int multiplikator_out = 2;
         final boolean debug = true;
-        final int[] spieler_ids = new int[]{1,2};
-        final int anzahl_sets = 1;
-        final int anzahl_legs = 5;
-        final String spiel_string = "1";
+        final int[] spieler_ids = new int[]{1,2,3};
+        final int anzahl_sets = 2;
+        final int anzahl_legs = 3;
+        final String spiel_string = "Spiel 1";
 
         final int wurf_offset = 0;
         final int zug_offset = 0;

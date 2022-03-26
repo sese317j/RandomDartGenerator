@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
@@ -12,10 +14,20 @@ public class Main {
 
 
     public static void main(String[] args) {
-
         System.out.println(PathToDir);
-        final int punkte_initial = 301;
-        final int multiplikator_out = 1;
+
+        if(!Files.exists(Paths.get(PathToDir))){
+            try {
+                Files.createDirectory(Paths.get(PathToDir));     //Create Output Dir
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+
+        final int punkte_initial = 501;
+        final int multiplikator_out = 3;
         final boolean debug = true;
         final int[] spieler_ids = new int[]{1,2};
         final int anzahl_sets = 1;

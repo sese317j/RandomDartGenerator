@@ -31,6 +31,9 @@ public class Leg {
                 case 2:
                     System.out.println("Double Out");
                     break;
+                case 3:
+                    System.out.println("Master Out");
+                    break;
                 default:
                     break;
             }
@@ -65,22 +68,37 @@ public class Leg {
 
                         punkte_zug += temp_wurf.getPunkte();    // Punkte für den aktuellen Zug berechnen
 
-                        // Falls Punkte 0 und letzter wurf passt zu multiplikator
-                        if (aktuelle_punkte - punkte_zug == 0) {
-                            if(multiplikator_out == 1){
-                                aktuelle_punkte = 0;            //Punkte auf 0, Spiel zu ende
-                                break;                          //verlasse aktuellen Zug
+
+                        if (aktuelle_punkte - punkte_zug == 0) {    // Falls Punkte 0 und letzter wurf passt zu multiplikator
+                            if(multiplikator_out == 1){             // Straight out: letzter wurf egal
+                                aktuelle_punkte = 0;                // Punkte auf 0, Spiel zu ende
+                                break;                              // verlasse aktuellen Zug
                             }
-                            else{
-                                if(temp_wurf.getMultiplikator() == multiplikator_out){
+                            else if(multiplikator_out == 2){            // double out
+                                if(temp_wurf.getMultiplikator() == 2){  // Nur wenn letzter wurf double
+                                    aktuelle_punkte = 0;                // Punkte auf 0, Spiel zu ende
+                                    break;                              // verlasse aktuellen Zug
+                                }
+                            }
+                            else if(multiplikator_out == 3){        // Master out
+                                if(temp_wurf.getMultiplikator() == 2 || temp_wurf.getMultiplikator() == 3){
                                     aktuelle_punkte = 0;            //Punkte auf 0, Spiel zu ende
                                     break;                          //verlasse aktuellen Zug
                                 }
                             }
 
-                        } else if (aktuelle_punkte - punkte_zug < 0 || aktuelle_punkte - punkte_zug < multiplikator_out) {        //Falls Überworfen
+                        }
+                        else if (aktuelle_punkte - punkte_zug < 0 ) {                           //Falls Überworfen über null
                             uberworfen = true;
-                            break;                                        //Verlasse aktuellen Zug aber zieh nicht Punkte ab
+                            break;                                                              //Verlasse aktuellen Zug aber zieh nicht Punkte ab
+                        }
+                        else if(multiplikator_out == 3 && (aktuelle_punkte - punkte_zug < 2)){  //Falls Überworfen bei Master Out
+                            uberworfen = true;
+                            break;
+                        }
+                    else if(aktuelle_punkte - punkte_zug < multiplikator_out){                  //Falls überworfen bei Double out
+                            uberworfen = true;
+                            break;
                         }
 
                     }

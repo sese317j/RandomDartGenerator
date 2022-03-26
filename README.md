@@ -2,6 +2,9 @@
 
 Dies ist ein Generator für zufällige Dart Spiel verlaufs Daten in SQL.
 Dieses Programm dient nur zum erstellen von Beispieldaten für eine Dart Spiel Webanwendung.
+Die Wahrscheinlichkeiten welche dieser Generator benutzt haben nichts mit den "echten" Wahrscheinlichkeiten eines Dartspiels zu tun.
+Use at your own risk.
+
 
 Momentan unterstützte Argumente:
 - PathToDir: Pfad zum Speicherort der generierten SQL Dateien

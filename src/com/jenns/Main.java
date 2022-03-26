@@ -12,6 +12,19 @@ public class Main {
 
     public static String PathToDir = System.getProperty("user.dir") + File.separator + "out" + File.separator + "OutputData";
 
+    final static int punkte_initial = 501;
+    final static int multiplikator_out = 2;
+    final static boolean debug = true;
+    final static int[] spieler_ids = new int[]{1,2,3};
+    final static int anzahl_sets = 2;
+    final static int anzahl_legs = 3;
+    final static String spiel_string = "Spiel 1";
+
+    final static int wurf_offset = 0;
+    final static int zug_offset = 0;
+    final static int leg_offset = 0;
+    final static int set_offset = 0;
+
 
     public static void main(String[] args) {
         System.out.println(PathToDir);
@@ -24,21 +37,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
-
-        final int punkte_initial = 501;
-        final int multiplikator_out = 2;
-        final boolean debug = true;
-        final int[] spieler_ids = new int[]{1,2,3};
-        final int anzahl_sets = 2;
-        final int anzahl_legs = 3;
-        final String spiel_string = "Spiel 1";
-
-        final int wurf_offset = 0;
-        final int zug_offset = 0;
-        final int leg_offset = 0;
-        final int set_offset = 0;
-
 
         List<List<Leg>> all_sets = new ArrayList<>();
 
